@@ -1,0 +1,107 @@
+﻿@model travelus.Models.BookingCart
+@using travelus.Extensions
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Tour Details</h2>
+<br />
+
+<form method="post">
+    <div class="border backgroundWhite row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-5 col-12 pb-4 d-md-none">
+            <img src="@Model.TourItem.Image" width="100%" style="border-radius:5px;border: 1px solid #bbb9b9" />
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="TourItem.Name" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <input asp-for="TourItem.Name" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="TourItem.Description" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <div class="border p-2">
+                        @Html.Raw(Model.TourItem.Description)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="TourItem.Price" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <input asp-for="TourItem.Price" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="TourItem.CategoryId" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <input asp-for="TourItem.Category.Name" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="TourItem.SubCategoryId" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <input asp-for="TourItem.SubCategory.Name" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="TourItem.Season" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <select asp-for="TourItem.Season" disabled asp-items="Html.GetEnumSelectList<TourItem.ESeason>()" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label asp-for="People" class="text-info font-weight-bold"></label>
+                </div>
+                <div class="col-md-8">
+                    <input asp-for="People" class="form-control" />
+                    <span asp-validation-for="People" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+                <div class="col-4">
+                    <button type="submit" value="Add to Cart" class="btn btn-primary form-control">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-5 offset-1 d-none d-md-block">
+            <img src="@Model.TourItem.Image" width="100%" style="border-radius:5px;border: 1px solid #bbb9b9" />
+        </div>
+
+
+
+    </div>
+    <input asp-for="TourItemId" hidden />
+</form>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js">
+    <script src="https://cdn.tiny.cloud/1/pgubw0ezqu7csfmaihiix4pmgp1zxwy2gmd0duvh4qdncuf9/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+@section Scripts{
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
